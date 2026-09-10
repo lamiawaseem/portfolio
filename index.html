@@ -12,6 +12,9 @@
             box-sizing: border-box;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
+        html {
+            font-size: 75%; /* Scales your entire site down by exactly 20% globally */
+        }
         body {
             background-color: #ffffff;
             color: #111111;
@@ -169,6 +172,39 @@
             color: #666666;
             font-size: 0.95rem;
         }
+        
+        /* --- Resume Scroll Hint --- */
+        .scroll-hint-text {
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #888888; /* Subtle grey so it looks like a professional UI tip */
+            margin-bottom: 15px; /* Pushes the resume images down slightly */
+            width: 100%;
+        }
+
+        /* --- Horizontal Scrolling Resume Canvas --- */
+        .resume-scroll-row {
+            display: flex;
+            flex-direction: row;       /* Forces images to line up side-by-side */
+            gap: 40px;                 /* Clean whitespace gap between paper sheets */
+            overflow-x: auto;          /* Enables smooth left-to-right scrolling */
+            padding-bottom: 20px;      /* Spacing room for the browser scrollbar */
+            width: 100%;
+            scroll-snap-type: x mandatory; /* Makes pages snap beautifully into place */
+        }
+        
+        .resume-scroll-row img {
+            width: 100%;
+            max-width: 620px;          /* to change size of resume pic */
+            height: auto;
+            flex-shrink: 0;            /* Stops the browser from squishing your document widths */
+            scroll-snap-align: start;  /* Links with the snapping behavior */
+            border: 1px solid #e0e0e0; /* Your clean thin black outline */
+            border-radius: 4px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        }
 
         /* --- Inside Project Detail Sheet View --- */
         .back-btn {
@@ -192,7 +228,7 @@
             flex-direction: column;
             gap: 40px;
             max-width: 1800px;
-            margin: 0; /* 🟢 CHANGED: Left-aligns your content with the back button */
+            margin: 0; /* CHANGED: Left-aligns your content with the back button */
         }
         .detail-text h2 {
             font-size: 2.3rem;
@@ -232,6 +268,7 @@
             height: auto;
             border-radius: 4px;
             object-fit: cover;
+            border: 1px solid #e0e0e0;
         }
         /* Safety check: cleanly stacks columns into a row list on smaller mobile widths */
         @media(max-width: 600px) {
@@ -254,6 +291,7 @@
             border-radius: 4px;
             object-fit: cover;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            border: 1px solid #e0e0e0;
         }
 
         /* --- Video Component Styling --- */
@@ -375,6 +413,7 @@
             height: auto;
             display: block;
             object-fit: contain;
+            border: 1px solid #111111;
         }
         
         /* --- Clean Portfolio Card Lists (2 Per Row) --- */
@@ -524,9 +563,13 @@
 
     <!-- Resume Page Block -->
     <section id="resume" class="page">
+        <p class="scroll-hint-text">Scroll to View More Pages &rarr;</p>
+
         <!-- Full Page Resume Image Container -->
-        <div class="resume-image-container">
-            <img src="images/my-resume.jpg" alt="My Professional Resume" class="resume-picture">
+        <div class="resume-scroll-row">
+            <img src="images/resume1.jpg" alt="My Resume Page 1" class="resume-picture">
+            <img src="images/resume2.jpg" alt="My Resume Page 2" class="resume-picture">
+            <img src="images/resume3.jpg" alt="My Resume Page 3" class="resume-picture">
         </div>
     </section>
 
