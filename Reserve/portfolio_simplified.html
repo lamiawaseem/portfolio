@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio Prototype</title>
     <style>
-        /* --- Global Reset & B&W Modern Theme --- */
         * {
             margin: 0;
             padding: 0;
@@ -13,7 +12,7 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
         html {
-            font-size: 75%; /* Scales your entire site down by exactly 20% globally */
+            font-size: 75%;
         }
         body {
             background-color: #ffffff;
@@ -21,8 +20,6 @@
             line-height: 1.5;
             -webkit-font-smoothing: antialiased;
         }
-
-        /* --- Rigid Header Navigation Bar --- */
         header {
             position: fixed;
             top: 0;
@@ -34,7 +31,6 @@
             padding:  20px 60px;
             background: #ffffff;
             z-index: 1000;
-            /* Solid crisp line under the logo name and menu items */
             border-bottom: 2px solid #111111;
         }
         .logo {
@@ -64,168 +60,123 @@
             color: #000000;
             border-bottom: 2px solid #000000;
         }
-
-        /* --- Dynamic Layout Viewports --- */
         .page {
-            display: none; /* Hidden by default */
+            display: none;
             padding: 110px 60px 60px 60px;
             min-height: 100vh;
             max-width: 1700px;
             margin: 0 auto;
         }
-        /* Target rule that lets the browser turn pages cleanly based on URL hash changes */
         .page:target, .page.default-view {
             display: block;
         }
-       
-        /* If another page block is actively targeted by a hash link, hide our default home container */
         body:has(.page:target:not(#home)) .page.default-view {
             display: none;
         }
-
-        /* --- Split Layout Image & Dark Profile Block --- */
         .page.full-width-override {
-            padding: 80px 0 0 0; /* Clear room under the taskbar */
+            padding: 80px 0 0 0;
             max-width: none;
             margin: 0;
         }
-
         .home-split-container {
             display: flex;
-            flex-wrap: wrap; /* THE SECRET: Automatically allows column dropping on mobile devices */
-            min-height: calc(100vh - 80px); /* Fills screen height comfortably */
+            flex-wrap: wrap;
+            min-height: calc(100vh - 80px);
             width: 100%;
         }
-
-        /* Left Side Image Frame with Dynamic Text Scaling */
         .home-left-hero {
             flex: 1 1 65%;
-            min-height: calc(100vh - 80px); /* Stretches the block to fill the vertical screen space */
+            min-height: calc(100vh - 80px);
             background-size: cover;
             background-position: center;
             display: flex;
-            align-items: flex-end;          /* Anchors your name to the bottom of the image */
-            justify-content: flex-start;    /* Aligns your name to the left side of the image */
-            padding: 60px;                  /* Cushion spacing around your name from the edges */
-            position: relative;
-            box-sizing: border-box;
-        }
-                /* --- Restore Bottom-Left Name Alignment --- */
-        .home-left-hero {
-            display: flex !important;
-            align-items: flex-end !important;   /* Pushes text straight down to the bottom */
-            justify-content: flex-start !important; /* Positions text to the left side */
-            padding: 60px !important;            /* Protects text from clipping the edge */
+            align-items: flex-end;
+            justify-content: flex-start;
+            padding: 60px;
             position: relative;
         }
-
-        /* Forces any heading element sitting inside this block to stay pure white */
         .home-left-hero h1,
         .home-center-header,
         .hero-main-title,
         .hero-sub-tags {
-            color: #ffffff !important;           /* FIXED: Erases the stubborn black color */
+            color: #ffffff !important;
             text-align: left !important;
             text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8) !important;
         }
-                /* 🟢 ADD THIS: Strips default margins from home text elements to fix the top gap */
-        #home h1, 
-        #home h2, 
+        #home h1,
+        #home h2,
         #home p,
         #home .home-center-header,
         #home .profile-inner-content {
             margin-top: 0 !important;
             padding-top: 0 !important;
         }
-
-        /* ADD THIS RULE RIGHT UNDERNEATH IT: Forces the smaller tag lines to be white too */
         .home-center-header .hero-sub-tags {
-            color: #ffffff !important;      /* FORCES subtitle text to solid white */
+            color: #ffffff !important;
             opacity: 0.9;
         }
-
         .hero-main-title {
-            font-size: clamp(2.5rem, 5vw, 5rem); /*  FLUID FONT: Automatically shrinks on small screens without queries */
+            font-size: clamp(2.5rem, 5vw, 5rem);
             font-weight: 700;
             line-height: 1.1;
             margin-bottom: 12px;
         }
-
         .hero-sub-tags {
-            font-size: clamp(0.9rem, 1.5vw, 1.1rem); /*  FLUID FONT */
+            font-size: clamp(0.9rem, 1.5vw, 1.1rem);
             font-weight: 400;
         }
-
-        /* --- Restore Right Profile Vertically & Horizontally Centered --- */
-                /* --- Right Side Dark Slate Profile Column Container --- */
         .home-right-profile {
             flex: 1 1 35%;
             background-color: #26292e;
             color: #ffffff;
-            padding: 40px !important;
-            display: flex !important;
+            padding: 40px;
+            display: flex;
             flex-direction: column !important;
-            align-items: center !important;     /* Centers the content block horizontally */
-            justify-content: center !important; /*  Centers the content block vertically */
-            box-sizing: border-box !important;
+            align-items: center !important;
+            justify-content: center !important;
+            box-sizing: border-box;
         }
-
-        /* --- Bio Content Box Layout Wrapper --- */
         .profile-inner-content {
             width: 100% !important;
             max-width: 380px !important;
             margin: 0 auto !important;
-            display: flex !important;
+            display: flex;
             flex-direction: column !important;
-            align-items: center !important;     /* Forces the avatar container to center line */
+            align-items: center !important;
         }
-
-        /* --- Photo Frame Alignment Box --- */
         .profile-avatar-container {
-            display: flex !important;
-            justify-content: center !important; /* Locks the image strictly to the middle axis */
+            display: flex;
+            justify-content: center !important;
             align-items: center !important;
             width: 100% !important;
-            margin: 0 auto 25px auto !important;/* Centered margins with a bottom gap */
+            margin: 0 auto 25px auto !important;
         }
-
-        /* Explicitly sizes and centers your profile picture */
         .home-right-profile img,
         .profile-avatar-img {
-            width: 240px !important;       /* FIXED: Adjust this number to make the image size smaller or larger */
-            height: auto !important;       /* Maintains perfect photo proportions */
-            max-width: 85% !important;     /* Prevents it from clipping on narrow laptop screens */
-            border-radius: 8px !important; /* Elegant rounded corners matching your portfolio card look */
-            border: 1px solid #e0e0e0 !important; /* Your signature clean grey outline border */
-            
-            /* 🟢 PERFECT CENTERING MATH */
+            width: 240px !important;
+            height: auto !important;
+            max-width: 85% !important;
+            border-radius: 8px !important;
+            border: 1px solid #e0e0e0 !important;
             display: block !important;
             margin-left: auto !important;
             margin-right: auto !important;
-            margin-bottom: 30px !important; /* Pushes the profile text down comfortably */
+            margin-bottom: 30px !important;
         }
-
-
-        /* Keeps your heading centered nicely above the paragraph */
         .profile-heading {
             font-size: 2.2rem;
             font-weight: 700;
             margin-bottom: 15px;
             text-align: center !important;
         }
-
-        /* Keeps your biography reading lines neat and left-aligned */
         .profile-bio-text {
             font-size: 1rem;
             line-height: 1.65;
-            color: #ffffff; 
-            text-align: left !important;        /* Preserves the professional look from your screenshot */
+            color: #ffffff;
+            text-align: left !important;
             width: 100%;
         }
-
-        /* Responsive safety parameters collapsing column down on mobile */
         @media(max-width: 1024px) {
-            /* Converts the top navigation bar into a clean stack so it never overlaps text */
             header {
                 flex-direction: column !important;
                 padding: 15px 20px !important;
@@ -242,41 +193,26 @@
                 justify-content: center !important;
                 width: 100% !important;
             }
-            /* Pushes all your page content down comfortably so it never gets clipped behind the new stacked header layout */
             .page {
-                padding-top: 150px !important; 
+                padding-top: 150px !important;
             }
-            /* --- Force Home to sit completely flush against the taskbar line --- */
             .page.full-width-override {
-                padding: 0 !important;          
-                max-width: none !important;     
+                padding: 0 !important;
+                max-width: none !important;
                 margin: 0 !important;
-                width: 100vw !important;        
-                height: calc(100vh - 80px) !important; 
+                width: 100vw !important;
+                height: calc(100vh - 80px) !important;
                 overflow: hidden !important;
-                display: flex !important;       
+                display: flex;
             }
-
-            /* ADD/UPDATE THIS: Clears internal collapses so the white gap disappears */
             .home-split-container {
                 display: flex;
-                flex-wrap: wrap; 
+                flex-wrap: wrap;
                 width: 100%;
                 min-height: 100%;
-                margin: 0 !important;          /* FORCES the outer white gap to vanish */
-                padding: 0 !important;         
+                margin: 0 !important;
+                padding: 0 !important;
             }
-        }
-
-        /* --- Portfolio Card Grid --- */
-        .project-card {
-            text-decoration: none;
-            color: inherit;
-            border: 1px solid #e0e0e0;
-            border-radius: 4px;
-            overflow: hidden;
-            display: block;
-            transition: transform 0.2s ease, border-color 0.2s ease;
         }
         .project-card:hover {
             border-color: #000000;
@@ -300,41 +236,34 @@
             color: #666666;
             font-size: 0.95rem;
         }
-        
-        /* --- Resume Scroll Hint --- */
         .scroll-hint-text {
             font-size: 0.8rem;
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            color: #888888; /* Subtle grey so it looks like a professional UI tip */
-            margin-bottom: 15px; /* Pushes the resume images down slightly */
+            color: #888888;
+            margin-bottom: 15px;
             width: 100%;
         }
-
-        /* --- Horizontal Scrolling Resume Canvas --- */
         .resume-scroll-row {
             display: flex;
-            flex-direction: row;       /* Forces images to line up side-by-side */
-            gap: 40px;                 /* Clean whitespace gap between paper sheets */
-            overflow-x: auto;          /* Enables smooth left-to-right scrolling */
-            padding-bottom: 20px;      /* Spacing room for the browser scrollbar */
+            flex-direction: row;
+            gap: 40px;
+            overflow-x: auto;
+            padding-bottom: 20px;
             width: 100%;
-            scroll-snap-type: x mandatory; /* Makes pages snap beautifully into place */
+            scroll-snap-type: x mandatory;
         }
-        
         .resume-scroll-row img {
             width: 100%;
-            max-width: 620px;          /* to change size of resume pic */
+            max-width: 620px;
             height: auto;
-            flex-shrink: 0;            /* Stops the browser from squishing your document widths */
-            scroll-snap-align: start;  /* Links with the snapping behavior */
-            border: 1px solid #e0e0e0; /* Your clean thin black outline */
+            flex-shrink: 0;
+            scroll-snap-align: start;
+            border: 1px solid #e0e0e0;
             border-radius: 4px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
         }
-
-        /* --- Inside Project Detail Sheet View --- */
         .back-btn {
             display: inline-block;
             background: #000000;
@@ -350,13 +279,12 @@
         .back-btn:hover {
             background: #333333;
         }
-                /* --- Stacked Project Detail Layout --- */
         .detail-layout {
             display: flex;
             flex-direction: column;
             gap: 40px;
             max-width: 1800px;
-            margin: 0; /* CHANGED: Left-aligns your content with the back button */
+            margin: 0;
         }
         .detail-text h2 {
             font-size: 2.3rem;
@@ -364,8 +292,6 @@
             margin-bottom: 30px;
             line-height: 1.1;
         }
-        
-        /* Mini Headers Styles */
         .detail-text h3 {
             font-size: 1.2rem;
             font-weight: 600;
@@ -381,12 +307,10 @@
             margin-bottom: 20px;
             line-height: 1.6;
         }
-        
-        /* --- Side-by-Side Images Row Layout --- */
         .side-by-side-row {
             display: grid;
-            grid-template-columns: repeat(4, 1fr); /* Divides the space into 2 equal columns */
-            gap: 20px; /* Space between the two side-by-side images */
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
             margin-top: 15px;
             margin-bottom: 25px;
             width: 100%;
@@ -398,15 +322,12 @@
             object-fit: cover;
             border: 1px solid #e0e0e0;
         }
-        /* Safety check: cleanly stacks columns into a row list on smaller mobile widths */
         @media(max-width: 600px) {
             .side-by-side-row {
                 grid-template-columns: 1fr;
                 gap: 15px;
             }
         }
-
-        /* Vertically Stacked Image Gallery Content */
         .detail-gallery {
             display: flex;
             flex-direction: column;
@@ -421,17 +342,13 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
             border: 1px solid #e0e0e0;
         }
-
-        /* --- Video Component Styling --- */
         .portfolio-video {
             width: 100%;
             height: auto;
             border-radius: 4px;
             object-fit: cover;
-            background-color: #000000; /* Dark background placeholder while loading */
+            background-color: #000000;
         }
-
-        /* --- Headers & Input Elements --- */
         h2.section-title {
             font-size: 2.8rem;
             font-weight: 500;
@@ -440,7 +357,6 @@
             border-bottom: 2px solid #000000;
             padding-bottom: 10px;
         }
-
         #contact .section-title {
             border-bottom: none;
             padding-bottom: 0;
@@ -475,8 +391,6 @@
             font-weight: 600;
             text-transform: uppercase;
         }
-
-        /* --- Contact Footer & Social Circles --- */
         .contact-details-footer {
             margin-top: 40px;
             max-width: 600px;
@@ -508,15 +422,12 @@
             fill: #111111;
             transition: fill 0.2s ease;
         }
-        /* Color inversion styling effect on hover interaction points */
         .social-circle:hover {
             background: #111111;
         }
         .social-circle:hover svg {
             fill: #ffffff;
         }
-        
-        /* --- Full Width Canvas Resume Picture --- */
         .resume-picture {
             width: 100%;
             height: auto;
@@ -524,24 +435,17 @@
             object-fit: contain;
             border: 1px solid #111111;
         }
-        
-        /* --- Clean Portfolio Card Lists (2 Per Row) --- */
         .projects-grid {
             display: grid;
-            /* Changes layout grid explicitly to 2 equal fractional columns on desktop screens */
             grid-template-columns: repeat(2, 1fr);
             gap: 50px;
             margin-top: 40px;
         }
-
-        /* Adjusts image frame heights on the cards to scale up with the wider cards nicely */
         .project-card-media {
             width: 100%;
-            height: 380px; /* Increased from 260px so wider images look well-proportioned */
+            height: 380px;
             overflow: hidden;
         }
-
-        /* Responsive safety override: cleanly collapses cards down to 1 per row on tablets and phones */
         @media(max-width: 900px) {
             .projects-grid {
                 grid-template-columns: 1fr;
@@ -551,7 +455,6 @@
                 height: 280px;
             }
         }
-
         .project-card {
             display: flex;
             flex-direction: column;
@@ -561,11 +464,6 @@
             background: #ffffff;
             transition: transform 0.2s ease, border-color 0.2s ease;
         }
-        .project-card:hover {
-            border-color: #000000;
-            transform: translateY(-2px);
-        }
-        
         .project-card-media img {
             width: 100%;
             height: 100%;
@@ -581,7 +479,7 @@
         .project-card-info h3 {
             font-size: 1.5rem;
             font-weight: 600;
-            color: #111111; /* Forces text to stay crisp black, never turning purple */
+            color: #111111;
             margin-bottom: 10px;
         }
         .project-card-summary {
@@ -591,13 +489,12 @@
             margin-bottom: 25px;
             flex-grow: 1;
         }
-        /* Modern Solid Accent Action Button */
         .view-details-btn {
             display: inline-block;
             text-align: center;
             background: #000000;
-            color: #ffffff !important; /* Overrides default link colors */
-            text-decoration: none !important; /* Strips away default underlines */
+            color: #ffffff !important;
+            text-decoration: none !important;
             padding: 12px 24px;
             font-size: 0.8rem;
             font-weight: 600;
@@ -609,7 +506,6 @@
         .view-details-btn:hover {
             background: #333333;
         }
-        /* --- design report Action Buttons --- */
         .report-button-container {
             margin-top: 50px;
             margin-bottom: 20px;
@@ -618,8 +514,8 @@
         .report-action-btn {
             display: inline-block;
             background: #000000;
-            color: #ffffff !important; /* Overrides default links and forces solid white text */
-            text-decoration: none !important; /* Completely blocks standard blue underlines */
+            color: #ffffff !important;
+            text-decoration: none !important;
             padding: 16px 32px;
             font-size: 0.9rem;
             font-weight: 600;
@@ -632,13 +528,9 @@
             background: #333333;
             transform: translateY(-1px);
         }
-
     </style>
 </head>
 <body>
-
-
-    <!-- Top Sticky Header Navigation Bar -->
     <header>
         <a href="#home" class="logo">Lamia Waseem</a>
         <nav id="navbar">
@@ -648,13 +540,8 @@
             <a href="#contact" id="link-contact">Contact</a>
         </nav>
     </header>
-
-
-        <!-- Home Page Block -->
     <section id="home" class="page default-view full-width-override">
         <div class="home-split-container">
-            
-            <!-- Left Side: Immersive Image with Large Text Overlay -->
             <div class="home-left-hero" style="background-image: url('images/main.jpg');">
                 <div class="hero-overlay-content">
                     <h1 class="hero-main-title">Lamia Waseem</h1>
@@ -663,11 +550,8 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Right Side: Dark Slate Column for Profile Content -->
             <div class="home-right-profile">
                 <div class="profile-inner-content">
-                    <!-- IMAGE SLOT ABOVE "MY PROFILE" -->
                     <div class="profile-avatar-container">
                         <img src="images/me7.jpg" alt="Lamia Waseem Profile Photo" class="profile-img">
                     </div>
@@ -676,60 +560,38 @@
                     </p>
                 </div>
             </div>
-
         </div>
     </section>
-
-    <!-- Resume Page Block -->
     <section id="resume" class="page">
-        <p class="scroll-hint-text">Scroll to View More Pages &rarr;</p> 
-        <!-- Full Page Resume Image Container -->
+        <p class="scroll-hint-text">Scroll to View More Pages &rarr;</p>
         <div class="resume-scroll-row">
             <img src="images/resume1.jpg" alt="My Resume Page 1" class="resume-picture">
             <img src="images/resume2.jpg" alt="My Resume Page 2" class="resume-picture">
         </div>
     </section>
-
-     <!-- Contact Page Block -->
     <section id="contact" class="page">
         <h2 class="section-title">Get In Touch</h2>
-        
-        <!-- Interactive Form -->
-        <form action="https://web3forms.com" method="POST">
-            
-            <input type="hidden" name="access_key" value="9c363c98-b001-4547-9f3b-d6cb150363b9">
-            
+        <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Message sent simulated prototype successfully.');">
             <input type="text" name="name" placeholder="YOUR NAME" required>
-            <input type="email" name="email" placeholder="YOUR EMAIL ADDRESS" required>
+            <input type="email" name="email" placeholder="EMAIL ADDRESS" required>
             <textarea name="message" rows="6" placeholder="YOUR MESSAGE HERE" required></textarea>
-            
             <button type="submit" class="submit-btn">Send Message</button>
         </form>
-
-        <!-- Contact Details & Circular Social Icons -->
         <div class="contact-details-footer">
             <p><strong>Email:</strong> lamia.waseem@gmail.com</p>
             <p><strong>Phone:</strong> +1 (825) 437-9526</p>
-            
             <div class="social-circles-container">
-                <!-- LinkedIn Circle Link -->
                 <a href="https://www.linkedin.com/in/lamia-waseem-6733aa33b/" target="_blank" class="social-circle" aria-label="LinkedIn">
                     <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37z"/></svg>
                 </a>
-                
-                <!-- GitHub Circle Link -->
                 <a href="https://github.com/lamiawaseem?tab=repositories" target="_blank" class="social-circle" aria-label="GitHub">
                     <svg viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
                 </a>
             </div>
         </div>
     </section>
-
-    <!-- Portfolio Grid Page Block -->
     <section id="portfolio" class="page">
         <div class="projects-grid">
-
-            <!-- Project 2 Card Layout Component -->
             <div class="project-card">
                 <div class="project-card-media">
                     <img src="images/pcb3.jpg" alt="Motor Driver & Power Distribution PCB">
@@ -740,8 +602,6 @@
                     <a href="#project-2" class="view-details-btn">View Full Project Details</a>
                 </div>
             </div>
-
-            <!-- Project 1 Card Layout Component -->
             <div class="project-card">
                 <div class="project-card-media">
                     <img src="images/car17.jpg" alt="Remote Control Car">
@@ -752,8 +612,6 @@
                     <a href="#project-1" class="view-details-btn">View Full Project Details</a>
                 </div>
             </div>
-
-            <!-- Project 3 Card Layout Component -->
             <div class="project-card">
                 <div class="project-card-media">
                     <img src="images/robot7.jpg" alt="Autonomous Delivery System">
@@ -764,8 +622,6 @@
                     <a href="#project-3" class="view-details-btn">View Full Project Details</a>
                 </div>
             </div>
-
-            <!-- Project 4 Card Layout Component -->
             <div class="project-card">
                 <div class="project-card-media">
                     <img src="images/garden6.jpg" alt="Embedded Environmental Monitoring & Control System">
@@ -776,21 +632,15 @@
                     <a href="#project-4" class="view-details-btn">View Full Project Details</a>
                 </div>
             </div>
-
         </div>
     </section>
-
-    <!-- Inside Project 2 Detail Page View -->
     <section id="project-2" class="page">
         <a href="#portfolio" class="back-btn">← Back to Portfolio</a>
-        
         <div class="detail-layout">
-            <!-- Text Content Stacked First -->
-            <div class="detail-text">           
+            <div class="detail-text">
                 <h3>Objective</h3>
                 <p>The goal was to design a complete PCB that could act as the electrical interface between an RC car's power source, microcontroller, and motors. The board was designed to integrate power distribution, regulated logic power, motor driving, and protection circuitry while remaining practical to manufacture.</p>
                 <p>The design was required to include microcontroller interfacing for control signals, a battery input, a regulated 5 V supply, a motor-driver circuit, at least one protection feature, status LEDs, test points, and mounting holes. To maintain compatibility with low-cost PCB manufacturing, the design was limited to a maximum 10 cm × 10 cm board size and two copper layers. Power traces also had to be appropriately sized for the expected motor current.</p>
-                
                 <h3>Overview</h3>
                 <p>The PCB was designed to act as the connection between the RC car's power source, microcontroller, and motors. The design was divided into several functional sections: power input and protection, voltage regulation, motor control, status indication, and testing. The first step was creating the schematic and identifying the components required for each section. The final component selection included the DRV8251ADDAR motor driver, AP63205WU-7 voltage regulator, FDS4435BZ MOSFET, fuse, protection diodes, capacitors, resistors, LEDs, connectors, and test points.</p>
                 <p>The power section was designed first because it determines how power is distributed throughout the rest of the board. The input path includes F1, a 0685T5000-01 fuse, providing overcurrent protection. Z2 (SMBJ15CA-Q) was included as a protection device across the supply, while Z1 (MMSZ5231B-7-F) provides additional voltage protection within the circuit. The FDS4435BZ MOSFET was also incorporated into the power circuitry. The basic power relationships were considered when designing the distribution network: P = VI. This relationship is important because the motor section can require substantially more current than the logic circuitry. This influenced the separation of the higher-current motor/power paths from the lower-current control circuitry.</p>
@@ -805,7 +655,6 @@
                 <p>-Maintaining connections between the microcontroller and motor-control circuitry</p>
                 <p>-Working within the board's physical dimensions(leaving room for mounting holes, connectors, and test points)</p>
                 <p>Using two layers meant that traces could be distributed between the top and bottom copper layers instead of routing everything on a single surface. After routing, the design was reviewed in the 2D PCB view to inspect the top and bottom traces. The board was then viewed in 3D to check the physical arrangement of components and confirm that the PCB represented a practical physical assembly.</p>
-
                 <h3>Skills Developed</h3>
                 <p>Tools & Resources: KiCad 3D Viewer, Saturn PCB Toolkit, SnapEDA/Component Search Engine</p>
                 <p>Circuit Design: Motor drivers, voltage regulation, protection circuits, power distribution</p>
@@ -813,7 +662,6 @@
                 <p>Hardware Design: Component footprints, connectors, test points, mounting holes</p>
                 <p>Troubleshooting: Layout iteration, routing challenges, schematic and PCB verification</p>
             </div>
-            
             <div class="side-by-side-row">
                 <img src="images/pcb5.jpg">
                 <img src="images/pcb1.jpg">
@@ -826,18 +674,13 @@
             </div>
         </div>
     </section>
-
-    <!-- Inside Project 1 Detail Page View -->
     <section id="project-1" class="page">
         <a href="#portfolio" class="back-btn">← Back to Portfolio</a>
-        
         <div class="detail-layout">
-            <!-- Text Content Stacked First -->
             <div class="detail-text">
                 <h3>Objective</h3>
                 <p>The goal of this project was to design and build a functional radio-controlled vehicle capable of wireless operation, copper-plate detection, ultrasonic distance sensing, and movement over a 20° incline. The project required the integration of mechanical, electrical, and embedded systems into a single working vehicle.</p>
                 <p>The design also had several constraints: the final vehicle had to include at least one custom PCB and a critical 3D-printed component, remain within a $120 CAD component budget, and could not use Arduino, Arduino IDE, or pre-built modules beyond those specifically permitted. The vehicle also needed to use a team-designed wireless controller and display real-time distance measurements.</p>
-                
                 <h3>Overview</h3>
                 <p>The project combined embedded programming, custom PCB design, power management, wireless communication, metal detection, distance sensing, and mechanical design. The final vehicle used two ESP32 microcontrollers, one for the car and one for the remote controller. The car used four DC gear motors for all-wheel drive, an HC-SR04 ultrasonic sensor for distance measurement, and a custom contact-based system for detecting copper plates. The controller used a dual-axis joystick for driving, push buttons for additional functions, and an LCD to display distance measurements. Two custom PCBs were designed: a power board for battery protection, voltage regulation, and motor control, and a remote-control PCB for the ESP32, joystick, buttons, and LCD interface. The mechanical system was designed in Fusion 360 and iterated alongside the electrical and software systems.</p>
                 <p>The drivetrain went through several major iterations as testing revealed limitations in torque, weight, and reliability. The initial design used rear-wheel drive with external gearboxes. Testing showed that the motors could spin freely but lacked sufficient torque when the vehicle was under load. Several gearbox designs were then tested, including a fully 3D-printed gearbox, plastic gears, and metal gears. Plastic gears experienced rapid wear, while metal gears increased the vehicle's weight without sufficiently improving performance. The final design switched to four 12 V high-torque DC gear motors, creating an all-wheel-drive system without external gearboxes. This reduced mechanical losses, simplified the drivetrain, and provided enough torque for the vehicle to successfully climb the ramp.</p>
@@ -845,18 +688,15 @@
                 <p>An HC-SR04 ultrasonic sensor was mounted at the front of the vehicle to measure distances to obstacles. Because the sensor operates at 5 V while the ESP32 uses 3.3 V logic, a voltage divider was implemented on the Echo signal. During testing, incorrect resistor values on the PCB caused unstable readings. The resistors were identified and replaced, restoring reliable distance measurements.</p>
                 <p>Two custom PCBs were designed in KiCad. The power PCB handled the 12 V battery supply, fuse protection, MOSFET protection, voltage regulation, decoupling, and motor-driver circuitry. High-current paths required wide traces and careful grounding to manage heat, voltage drops, and electrical noise. The remote-control PCB integrated the ESP32, joystick, push buttons, and LCD. Dense GPIO routing required careful trace placement and consideration of signal integrity. Several PCB issues were discovered during testing, including an incorrect use of ESP32 GPIO2, which is subject to boot-strapping constraints, and problems with the LCD level-shifting circuit. Rather than completely redesigning the boards, the issues were resolved through external rewiring, circuit modifications, and breakout boards.</p>
                 <p>The embedded software was developed from scratch using ESP-IDF and Visual Studio Code. The controller reads joystick positions through the ESP32's ADC, processes the inputs into movement commands, and transmits them wirelessly using ESP-NOW. The car receives these commands and controls four motors while simultaneously measuring distance with the HC-SR04. The controller also receives distance data from the car and displays it on the LCD. The software was organized into separate modules for joystick input, ESP-NOW communication, LCD control, motor control, and ultrasonic sensing, making the system easier to debug and modify.</p>
-
                 <h3>My Role</h3>
                 <p>As Project Manager, I helped keep the team organized, coordinated responsibilities, and kept the project moving toward sprint and final deadlines. I also worked across multiple subsystems rather than focusing exclusively on one area. </p>
                 <p>I was responsible for developing the embedded software, including the ESP32 car and controller code. This involved implementing joystick ADC input, ESP-NOW wireless communication, motor control, ultrasonic distance measurement, LCD communication, and button functionality. I also contributed significantly to the PCB design and electrical integration. Since the software depended on specific microcontroller peripherals, I helped determine appropriate GPIO assignments and identify pins that should be avoided because of functions such as ADC requirements and boot-strapping constraints. I also helped troubleshoot hardware issues by referring to datasheets and testing individual components. For the mechanical design, I contributed to the 3D modelling and iteration of the chassis, motor mounts, shelving, and metal-detection attachment, building on prior CAD experience. I also assisted with the overall circuitry and system integration, where multiple team members were needed to interpret datasheets, connect subsystems, and troubleshoot interactions between hardware and software.</p>
-
                 <h3>Skills Developed</h3>
                 <p>Embedded Programming: C/C++, ESP-IDF, ESP32</p>
                 <p>PCB Design: KiCad, circuit design, PCB routing</p>
                 <p>Mechanical Design: Fusion 360, 3D printing</p>
                 <p>Testing & Debugging: Troubleshooting, prototyping, iterative testing</p>
                 <p>Project Management: Team coordination and project planning</p>
-                
                 <div class="side-by-side-row">
                     <img src="images/car2.jpg">
                     <img src="images/car8.jpg">
@@ -872,8 +712,6 @@
                         Your browser does not support the video tag.
                     </video>
                 </div>
-            
-            <!-- Design Report Button -->
             <div class="report-button-container">
                 <a href="images/RemoteControlCarDesignReport.pdf" target="_blank" class="report-action-btn">
                     Design Report
@@ -881,18 +719,13 @@
             </div>
         </div>
     </section>
-
-    <!-- Inside Project 3 Detail Sheet View -->
     <section id="project-3" class="page">
         <a href="#portfolio" class="back-btn">← Back to Portfolio</a>
-        
         <div class="detail-layout">
-            <!-- Text Content Stacked First -->
             <div class="detail-text">
                 <h3>Objective</h3>
                 <p>The goal of this project was to design and build an autonomous robot capable of navigating an 8 ft × 8 ft course, retrieving magnetic payloads, and delivering them to a designated drop-off area within a 10-minute time limit. The robot needed to follow a tape-guided route, detect and avoid obstacles, identify magnetic payloads, and transport them without human control.</p>
                 <p>The project was subject to strict material restrictions. The robot had to use the provided electrical components and 3D-printed components, with no new purchases allowed. This required the team to design around the available sensors, motors, and microcontroller while keeping the mechanical design compact and reliable.</p>
-
                 <h3>Overview</h3>
                 <p>We first brainstormed several payload retrieval concepts, including a magnetic rod, pinchers, claw, “patty flipper,” and forklift. Each concept was compared based on mechanical complexity, weight distribution, reliability, required motor and sensor usage, and how easily it could be integrated with the navigation system. The rear-facing forklift was selected because it provided a relatively simple lifting mechanism while keeping the front of the robot clear for navigation and obstacle-detection sensors.</p>
                 <p>After selecting the forklift concept, we developed the physical layout around the required sensors and mechanisms. Three ultrasonic sensors were positioned around the front and sides of the robot to provide distance measurements and reduce blind spots during navigation. An infrared line sensor was used to detect the black course tape, while an IR photodiode was used to identify the drop-off area. The MPU-6050 gyroscope provided orientation feedback so the robot could track its angular position after turns and obstacle-avoidance maneuvers. A reed switch was incorporated near the payload mechanism to identify the magnetic payload, while a limit switch provided confirmation that the payload had reached the correct position on the forklift. This allowed the robot to distinguish between a normal obstacle and a target payload rather than treating every detected object the same way.</p>
@@ -901,10 +734,8 @@
                 <p>The navigation logic was built around a sequence of sensor-driven decisions. At startup, the robot searched for the black tape and aligned itself with the course. During normal movement, the line sensor provided course guidance while the ultrasonic sensors continuously checked for obstacles. If an obstacle was detected, the robot stopped, compared the available space on either side, performed a 90° avoidance turn, moved around the obstruction, and searched for the tape again. The recorded gyroscope heading was then used to realign the robot with its original route. When an object was encountered near the payload area, the reed switch was used to determine whether it was magnetic; if identified as a payload, the robot approached it and activated the forklift. This created a layered control system where individual sensors handled specific tasks while the main routine coordinated their outputs.</p>
                 <p>Testing was performed progressively rather than waiting until the entire robot was assembled. Individual sensors and mechanisms were checked first, followed by motor movement, forklift operation, obstacle detection, and navigation behaviours. Sensor thresholds and sensitivities were adjusted based on observed readings, and the gyroscope was calibrated to reduce drift. Wiring was also reorganized to improve the use of the limited internal space and reduce the possibility of shorts. Once individual functions were reliable, they were combined into the larger autonomous routines for payload navigation and drop-off. This step-by-step process made it possible to identify whether an issue originated from the mechanical system, electronics, sensor readings, or software rather than debugging the entire system simultaneously.</p>
                 <p>A major part of the development process involved troubleshooting hardware failures. Several Raspberry Pi Pico boards failed during testing, requiring the team to repeatedly rewire the system, reload the program, and isolate the source of the failure. The reed switch was also initially identified as faulty after troubleshooting and consultation with multiple TAs. Rather than redesigning the entire system around the issue, the team isolated the faulty component and replaced it, allowing the intended magnetic-detection system to operate. These setbacks required repeated testing and adaptation but also provided practical experience in diagnosing hardware faults and separating component failures from problems in the design itself. The final system was able to operate as intended once the faulty component was replaced.</p>
-                
                 <h3>My Role</h3>
                 <p>I contributed across project management, programming, mechanical design, and circuitry. I helped keep the team organized by creating and maintaining the Gantt chart and project logbook while coordinating progress between different parts of the project. I also contributed directly to the robot's programming, developing and commenting functions for sensor integration, motor control, navigation, obstacle avoidance, and autonomous operation. I assisted with the circuitry work by researching component datasheets, understanding pin requirements. For the mechanical side, I helped with the 3D design and refinement of the robot, applying previous CAD experience to the casing and mechanical components.</p>
-
                 <h3>Skills Developed</h3>
                 <p>Programming: MicroPython, autonomous control, motor/servo control, sensor integration</p>
                 <p>Robotics: Obstacle avoidance, line detection, IMU orientation, payload detection</p>
@@ -913,7 +744,6 @@
                 <p>Testing & Troubleshooting: System integration, calibration, hardware debugging, iterative design</p>
                 <p>Project Management: Task planning, Gantt charts, documentation, team coordination</p>
             </div>
-        
             <div class="side-by-side-row">
                 <img src="images/robot1.jpg">
                 <img src="images/robot2.jpg">
@@ -923,35 +753,27 @@
             </div>
         </div>
     </section>
-
-    <!-- Inside Project 4 Detail Sheet View -->
     <section id="project-4" class="page">
         <a href="#portfolio" class="back-btn">← Back to Portfolio</a>
-        
         <div class="detail-layout">
-            <!-- Text Content Stacked First -->
             <div class="detail-text">
                 <h3>Objective</h3>
                 <p>The objective of this project was to design and build a portable indoor garden capable of automatically monitoring and maintaining growing conditions for a plant. The system was designed to use a Raspberry Pi Pico to monitor soil moisture, soil temperature, and ambient light, then respond automatically by controlling a water pump and LED grow light. The design also needed to address practical concerns such as water management, drainage, flooding prevention, electrical safety, waterproofing, ease of maintenance, and efficient use of water and energy.</p>
                 <p>A major design consideration was ensuring that the electronics remained protected while still allowing the sensors and actuators to operate effectively. The system therefore required integration of mechanical, electrical, and software components into a single reliable system rather than treating each subsystem independently.</p>
-                
                 <h3>Overview</h3>
                 <p>The design process began with brainstorming and evaluating several possible garden configurations. Concepts included a tube garden, beam box, cross-box garden, string watering system, water-spout design, and tower design. Each concept was compared based on water distribution, pump strain, drainage, flooding risk, electrical safety, material usage, portability, lighting coverage, plant growth, and ease of maintenance. This evaluation helped identify problems with several of the initial concepts before committing resources to fabrication.</p>
                 <p>For example, the tube and tower concepts provided compact layouts but required water to be pumped vertically, increasing the demand on the pump and creating additional concerns about how to protect the electronics. The beam box provided broad water and light distribution but introduced risks from having an elevated water system near electrical components. Other designs provided good drainage but were either bulky or difficult to integrate with the lighting system. Evaluating these tradeoffs helped narrow the design toward a solution that balanced mechanical simplicity, water efficiency, and electrical safety.</p>
                 <p>The final design used a bottom-feeder watering system. Instead of spraying water onto the plant from above, water was supplied from below the soil, allowing the soil to absorb water as needed. This approach reduced concerns associated with excessive top-down watering and provided better control over moisture while reducing unnecessary water waste. It also allowed the pump to operate with less vertical lifting than several of the alternative designs, reducing pump strain.</p>
                 <p>The physical structure was designed in Fusion 360, where custom components and the overall garden assembly were developed before fabrication. The design was made modular so that dimensions could be adjusted for different plant sizes. Components were then manufactured using 3D printing, allowing the physical design to be quickly tested and modified. This iterative approach made it possible to identify mechanical issues such as component placement, tubing routing, and accessibility before finalizing the assembly.</p>
                 <p>Electrical safety was incorporated into the mechanical design from the beginning. Separate compartments were included for the electronics so that the Raspberry Pi Pico and other electrical components could remain isolated from the water system. Tubing was routed underneath the circuitry to keep water paths away from sensitive electronics. A protective lid was also incorporated to cover internal components and provide a cleaner, more maintainable final assembly.The electrical system was developed alongside the mechanical design. The Raspberry Pi Pico was connected to a STEMMA soil sensor through I²C to obtain soil moisture and temperature measurements. A photoresistor connected to an ADC input was used to measure ambient light, while digital outputs controlled the water pump and LED grow light. A float switch was incorporated as an additional safety mechanism to prevent the pump from operating when the water level was already high.</p>
-                
                 <h3>My Role</h3>
                 <p>My primary role was software development and system control for the automated indoor garden. I developed the MicroPython program for the Raspberry Pi Pico to collect and process soil moisture, temperature, and ambient light data and use these measurements to control the pump and LED grow light. I implemented the watering logic using moisture thresholds, timed watering intervals, and the float switch as a safety condition to prevent flooding. I also added sensor error handling and reinitialization for reliable operation. I contributed to the electrical and mechanical design of the automated indoor garden by evaluating the garden design, with a focus on water management, electrical safety, and component placement. I worked on wiring and soldering the soil sensor, float switch, pump, and LED grow lights, and tested each component individually before integrating the full system. During testing, I helped troubleshoot sensor communication, water flow, and control behavior, making adjustments to the hardware layout and software thresholds to improve the reliability of the final prototype.</p>
-
                 <h3>Skills Developed</h3>
                 <p>Programming: MicroPython, sensor-based control, automated decision logic, I²C communication, ADC/analog sensing, error handling</p>
                 <p>Hardware: Raspberry Pi Pico, environmental monitoring, sensor integration, digital/analog I/O, automated actuator control, STEMMA soil sensor, photoresistor, float switch, water pump, LED grow lights, circuit assembly, soldering</p>
                 <p>System Integration: Electrical-mechanical integration, sensor/actuator interfacing, water and electronics separation, subsystem integration</p>
                 <p>Testing & Troubleshooting: Component testing, sensor calibration, water-flow testing, system integration, iterative design, fault handling</p>
             </div>
-            
             <div class="side-by-side-row">
                 <img src="images/garden2.jpg">
                 <img src="images/garden1.jpg">
@@ -960,18 +782,12 @@
             </div>
         </div>
     </section>
-
-
-    <!-- Paste the Script right here, between the last section and body tag -->
-    <!-- Active Link Synchronization Script -->
     <script>
         function updateActiveNavState() {
             const currentHash = window.location.hash || '#home';
             const navLinks = document.querySelectorAll('#navbar a');
-            
             navLinks.forEach(link => {
                 const targetHash = link.getAttribute('href');
-                
                 // Smart check handles portfolio parent tracking highlight smoothly across all 4 sub-projects
                 if (currentHash === targetHash || (targetHash === '#portfolio' && currentHash.startsWith('#project-'))) {
                     link.classList.add('active');
@@ -980,10 +796,8 @@
                 }
             });
         }
-
         window.addEventListener('hashchange', updateActiveNavState);
         window.addEventListener('load', updateActiveNavState);
     </script>
-
 </body>
 </html>

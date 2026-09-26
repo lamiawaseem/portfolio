@@ -694,15 +694,11 @@
     <section id="contact" class="page">
         <h2 class="section-title">Get In Touch</h2>
         
-        <!-- Interactive Form -->
-        <form action="https://web3forms.com" method="POST">
-            
-            <input type="hidden" name="access_key" value="9c363c98-b001-4547-9f3b-d6cb150363b9">
-            
+        <!-- Interactive Form Prototype -->
+        <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Message sent simulated prototype successfully.');">
             <input type="text" name="name" placeholder="YOUR NAME" required>
-            <input type="email" name="email" placeholder="YOUR EMAIL ADDRESS" required>
+            <input type="email" name="email" placeholder="EMAIL ADDRESS" required>
             <textarea name="message" rows="6" placeholder="YOUR MESSAGE HERE" required></textarea>
-            
             <button type="submit" class="submit-btn">Send Message</button>
         </form>
 
