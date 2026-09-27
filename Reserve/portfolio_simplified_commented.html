@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio Prototype</title>
     <style>
+        /* ==================== GLOBAL STYLES ==================== */
         * {
             margin: 0;
             padding: 0;
@@ -20,6 +21,8 @@
             line-height: 1.5;
             -webkit-font-smoothing: antialiased;
         }
+        /* ==================== HEADER / NAVIGATION ==================== */
+        /* Fixed navigation bar at the top of the screen */
         header {
             position: fixed;
             top: 0;
@@ -60,6 +63,8 @@
             color: #000000;
             border-bottom: 2px solid #000000;
         }
+        /* ==================== PAGE LAYOUT ==================== */
+        /* Each page is hidden until its URL hash is selected */
         .page {
             display: none;
             padding: 110px 60px 60px 60px;
@@ -78,6 +83,8 @@
             max-width: none;
             margin: 0;
         }
+        /* ==================== HOME PAGE ==================== */
+        /* Splits the home page into the image area and profile area */
         .home-split-container {
             display: flex;
             flex-wrap: wrap;
@@ -245,6 +252,8 @@
             margin-bottom: 15px;
             width: 100%;
         }
+        /* ==================== RESUME ==================== */
+        /* Allows multiple resume pages to scroll horizontally */
         .resume-scroll-row {
             display: flex;
             flex-direction: row;
@@ -349,6 +358,8 @@
             object-fit: cover;
             background-color: #000000;
         }
+        /* ==================== CONTACT ==================== */
+        /* Main heading used on the Contact page */
         h2.section-title {
             font-size: 2.8rem;
             font-weight: 500;
@@ -435,6 +446,8 @@
             object-fit: contain;
             border: 1px solid #111111;
         }
+        /* ==================== PORTFOLIO ==================== */
+        /* Places project cards into a responsive grid */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -464,7 +477,7 @@
             background: #ffffff;
             transition: transform 0.2s ease, border-color 0.2s ease;
         }
-        .project-card-media img {
+.project-card-media img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -531,6 +544,8 @@
     </style>
 </head>
 <body>
+    <!-- ==================== HEADER ==================== -->
+    <!-- Fixed navigation bar used to switch between pages -->
     <header>
         <a href="#home" class="logo">Lamia Waseem</a>
         <nav id="navbar">
@@ -540,6 +555,7 @@
             <a href="#contact" id="link-contact">Contact</a>
         </nav>
     </header>
+    <!-- ==================== HOME PAGE ==================== -->
     <section id="home" class="page default-view full-width-override">
         <div class="home-split-container">
             <div class="home-left-hero" style="background-image: url('images/main.jpg');">
@@ -562,6 +578,8 @@
             </div>
         </div>
     </section>
+
+    <!-- ==================== RESUME PAGE ==================== -->
     <section id="resume" class="page">
         <p class="scroll-hint-text">Scroll to View More Pages &rarr;</p>
         <div class="resume-scroll-row">
@@ -569,6 +587,8 @@
             <img src="images/resume2.jpg" alt="My Resume Page 2" class="resume-picture">
         </div>
     </section>
+
+    <!-- ==================== CONTACT PAGE ==================== -->
     <section id="contact" class="page">
         <h2 class="section-title">Get In Touch</h2>
         <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Message sent simulated prototype successfully.');">
@@ -590,6 +610,8 @@
             </div>
         </div>
     </section>
+
+    <!-- ==================== PORTFOLIO PAGE ==================== -->
     <section id="portfolio" class="page">
         <div class="projects-grid">
             <div class="project-card">
@@ -634,6 +656,8 @@
             </div>
         </div>
     </section>
+
+    <!-- ==================== PROJECT 2: PCB ==================== -->
     <section id="project-2" class="page">
         <a href="#portfolio" class="back-btn">← Back to Portfolio</a>
         <div class="detail-layout">
@@ -674,6 +698,8 @@
             </div>
         </div>
     </section>
+
+    <!-- ==================== PROJECT 1: RC CAR ==================== -->
     <section id="project-1" class="page">
         <a href="#portfolio" class="back-btn">← Back to Portfolio</a>
         <div class="detail-layout">
@@ -719,6 +745,8 @@
             </div>
         </div>
     </section>
+
+    <!-- ==================== PROJECT 3: AUTONOMOUS ROBOT ==================== -->
     <section id="project-3" class="page">
         <a href="#portfolio" class="back-btn">← Back to Portfolio</a>
         <div class="detail-layout">
@@ -753,6 +781,8 @@
             </div>
         </div>
     </section>
+
+    <!-- ==================== PROJECT 4: ENVIRONMENTAL SYSTEM ==================== -->
     <section id="project-4" class="page">
         <a href="#portfolio" class="back-btn">← Back to Portfolio</a>
         <div class="detail-layout">
@@ -782,6 +812,9 @@
             </div>
         </div>
     </section>
+
+    <!-- ==================== JAVASCRIPT ==================== -->
+    <!-- Keeps the active navigation link synchronized with the URL hash -->
     <script>
         function updateActiveNavState() {
             const currentHash = window.location.hash || '#home';
